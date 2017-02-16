@@ -1,0 +1,141 @@
+@font-face {
+  font-family: 'Anton';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../fonts/Anton-regular/Anton-regular.eot');
+  src: url('../fonts/Anton-regular/Anton-regular.eot?#iefix') format('embedded-opentype'),
+       local('Anton Regular'),
+       local('Anton-regular'),
+       url('../fonts/Anton-regular/Anton-regular.woff2') format('woff2'),
+       url('../fonts/Anton-regular/Anton-regular.woff') format('woff'),
+       url('../fonts/Anton-regular/Anton-regular.ttf') format('truetype'),
+       url('../fonts/Anton-regular/Anton-regular.svg#Anton') format('svg');
+}
+
+@font-face {
+  font-family: 'Lobster';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../fonts/Lobster-regular/Lobster-regular.eot');
+  src: url('../fonts/Lobster-regular/Lobster-regular.eot?#iefix') format('embedded-opentype'),
+       local('Lobster'),
+       local('Lobster-regular'),
+       url('../fonts/Lobster-regular/Lobster-regular.woff2') format('woff2'),
+       url('../fonts/Lobster-regular/Lobster-regular.woff') format('woff'),
+       url('../fonts/Lobster-regular/Lobster-regular.ttf') format('truetype'),
+       url('../fonts/Lobster-regular/Lobster-regular.svg#Lobster') format('svg');
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.fullscreen {
+  height: 100vh; 
+}
+#bg {
+  background: url(../images/Ships_Cosco_Container_ship_in_the_port_107062_.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  padding: 0;
+}
+#dimmer {
+  background: rgba(0,0,0,0.45);
+}
+
+#slogan {
+  color: white;
+  text-align: center;
+  padding-top: 35vh;
+}
+#slogan p {
+  font-family: 'Lobster';
+  font-size: 7vh;
+}
+#slogan strong {
+  font-family: 'Anton';
+}
+#slogan p:nth-child(2) {
+  font-size: 3vh;
+  position: relative;
+  top: -2vh;
+}
+
+/*#slogan {
+  position: absolute;
+  color: white;
+  top: 20vh;
+  left: 15vw;
+}
+#slogan > p {
+  font-family: 'Lobster';
+  font-size: 10vh;
+  text-align: left;
+}
+#slogan > strong {
+  font-family: 'Anton';
+  font-size: 15vh;
+  position: relative;
+  top: -5vh;
+}
+#slogan > p:last-child {
+  font-size: 5vh;
+  position: relative;
+  top: -7vh;
+}*/
+
+/*.WelcomeButton {
+  width: 15vw;
+  height: 7vh;
+  position: absolute;
+  border-radius: 2vh;
+  border: 1px white solid;
+  top: 70vh;
+  left: 42.5vw;
+  perspective: 1000px;
+}
+#buttonBg {
+  background: white;
+  transform-origin: bottom;
+  transform: rotateX(90deg);
+  animation-name: welcomeButtonAnime;
+  animation-duration: 1s;
+  animation-direction: reverse;
+}
+#clickButton:hover + #buttonBg{
+  animation-name: welcomeButtonAnime;
+  animation-duration: 1s;
+}
+
+@keyframes welcomeButtonAnime {
+  from { transform: rotateX(90deg); }
+  to { transform: rotateX(0deg); }
+}*/
+
+#clickButton {
+  width: 8vw;
+  height: 8vw;
+  border-radius: 4vw;
+  /*border: 1px white solid;*/
+  position: absolute;
+  left: 46vw;
+  top: 70vh;
+  /*background: radial-gradient(at 50%, white, grey);*/
+  background-color: #f7f7f7;
+  background-image: linear-gradient(top, #f7f7f7, #e7e7e7);
+}
+#clickButton > div {
+  width: 2vw;
+  height: 2vw;
+  position: relative;
+  /*background: #bbb;*/
+  background-color: #f7f7f7;
+  background-image: -webkit-linear-gradient(top, #f7f7f7, #e7e7e7);
+  border-radius: 1vw;
+  top: 3vw;
+  left: 3vw;
+  /*box-shadow: inset 5px 0 1vw #777;*/
+}
