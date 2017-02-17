@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>bgC</title>
+	<link rel="stylesheet" type="text/css" href="bgCarousel.css">
+	<script type="text/javascript" src="../libs/jquery-3.0.0.js"></script>
+</head>
+<body>
+	<div id="bgCarousel">
+		<div class="bgCslide"></div>
+		<div class="bgCslide"></div>
+		<div class="bgCslide"></div>
+		<div class="bgCslide bgCactive"></div>
+		<div class="bgCslide"></div>
+		<div class="bgCslide"></div>
+		<div class="bgCslide"></div>
+	</div>
+
+<script type="text/javascript">
+	var ind;
+	$('.bgCslide','#bgCarousel').each( function(i){
+		if ($(this).hasClass('bgCactive')) ind = i;
+	});
+
+	function reOrient(){
+		$('.bgCslide.bgCactive','#bgCarousel').prevAll()
+			.each(function(i){
+				$(this).css('transform', 'translateX('+ (-30 + i * (-5)) + 'vh) rotateY(45deg) translateZ(20vh)');
+			}).css('background','grey');
+
+		$('.bgCslide.bgCactive','#bgCarousel').nextAll()
+			.each(function(i){
+				$(this).css('transform', 'translateX('+ (30 + i * 5) + 'vh) rotateY(-45deg) translateZ(20vh)');
+			}).css('background','steelblue');
+
+		$('.bgCactive').css({'background':'green',
+							'transform':'none'});
+	}
+	reOrient();
+
+	$(document).keydown(function(e){
+		switch (e.keyCode) {
+			case 39: console.log('arrowRight');
+					$('.bgCslide.bgCactive','#bgCarousel').next().addClass('bgCactive').prev().removeClass('bgCactive');
+					reOrient();
+					break;
+			case 37: console.log('arrowLeft');
+					$('.bgCslide.bgCactive','#bgCarousel').prev().addClass('bgCactive').next().removeClass('bgCactive');
+					reOrient();
+			break;
+			default: console.log('button');
+			break;
+		}
+	});
+</script>
+</body>
+</html>
