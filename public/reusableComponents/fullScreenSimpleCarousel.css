@@ -1,0 +1,50 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+.cover {
+	overflow: hidden;
+	width: 50vw;
+	overflow: hidden;
+	margin: 25vh 100px;
+	position: relative;
+	height: 50vh;
+}
+.fsCcontainer {
+	width: 250vw;
+	height: 50vh;
+}
+
+.fsCslide {
+	width: 50vw;
+	height: 50vh;
+	float: left;
+	display: inline-block;
+	font-size: 12em;
+	font-family: sans-serif;
+	text-align: center;
+	line-height: 50vh;
+	background: teal;
+}
+
+.fsCactive{
+	background: steelblue;
+}
+
+
+
+/*.fsCslide:nth-child(1){
+	background: darksalmon;
+}
+.fsCslide:nth-child(2){
+	background: lightgreen;
+}
+.fsCslide:nth-child(3){
+	background: steelblue;
+}
+.fsCslide:nth-child(4){
+	background: teal;
+}
+.fsCslide:nth-child(5){
+	background: crimson;
+}*/

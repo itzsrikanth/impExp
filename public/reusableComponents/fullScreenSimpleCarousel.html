@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>fsC</title>
+	<link rel="stylesheet" type="text/css" href="fullScreenSimpleCarousel.css">
+	<script type="text/javascript" src="../libs/jquery-2.2.4.js"></script>
+	<link rel="stylesheet" type="text/css" href="../libs/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../libs/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="../libs/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="cover">
+	<div class="fsCcontainer">
+		<div class="fsCslide">1</div>
+		<div class="fsCslide">2</div>
+		<div class="fsCslide fsCactive">3</div>
+		<div class="fsCslide">4</div>
+		<div class="fsCslide">5</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var w = $('.cover').width(),
+		first = $('.fsCslide:first-child').clone(),
+		last = $('.fsCslide:last-child').clone();
+
+	first.appendTo($('.fsCcontainer'));
+	last.prependTo($('.fsCcontainer'));
+
+	var count = $('.fsCslide').length;
+	$('.fsCcontainer').width(w*count);
+
+	(function(){
+		$('.cover').scrollLeft($('.fsCactive').position().left);
+	})();
+
+	$(document).keydown(function(e){
+		switch (e.keyCode){
+			case 39: 
+					$('.fsCactive').removeClass('fsCactive').next().addClass('fsCactive');
+					$('.cover').animate({ scrollLeft: $('.cover').scrollLeft() + Math.abs($('.fsCactive').position().left)},
+					{	duration: 500,
+						ease: 'easeOutBounce',
+						complete: function(){
+							if( $('.fsCactive').next().length === 0 ){
+								$('.cover').scrollLeft( w );
+								$('.fsCactive').removeClass('fsCactive');
+								$('.fsCslide:eq(1)').addClass('fsCactive');
+								// alert('right');
+							}
+						}
+					});
+				break;
+			case 37: 
+					$('.fsCactive').removeClass('fsCactive').prev().addClass('fsCactive');
+					$('.cover').animate({ scrollLeft: $('.cover').scrollLeft() - Math.abs($('.fsCactive').position().left)},
+					{	duration: 500,
+						ease: 'easeOutBounce',
+						complete: function(){
+							if( $('.fsCactive').prev().length === 0 ){
+								$('.cover').scrollLeft( w * ( count-2 ) );
+								$('.fsCactive').removeClass('fsCactive');
+								$('.fsCslide:eq(-2)').addClass('fsCactive');
+								// alert('left');
+							}
+						}
+					});
+		}
+		// console.log(-$('.fsCcontainer').position().left);
+		// $('.cover').animate({ scrollLeft: $('.fsCcontainer').position().left + $('.fsCactive').prev().position.left},
+		// {	duration: 500,
+		// 	ease: 'easeOutBounce'
+		// });
+	})
+</script>
+</body>
+</html>
