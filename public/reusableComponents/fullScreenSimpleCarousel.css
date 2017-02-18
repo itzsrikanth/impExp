@@ -4,26 +4,26 @@
 }
 .cover {
 	overflow: hidden;
-	width: 50vw;
+	width: 100vw;
 	overflow: hidden;
-	margin: 25vh 100px;
+	/*margin: 25vh 100px;*/
 	position: relative;
-	height: 50vh;
+	height: 100vh;
 }
 .fsCcontainer {
-	width: 250vw;
-	height: 50vh;
+	/*width: 250vw;*/
+	height: 100vh;
 }
 
 .fsCslide {
-	width: 50vw;
-	height: 50vh;
+	width: 100vw;
+	height: 100vh;
 	float: left;
 	display: inline-block;
 	font-size: 12em;
 	font-family: sans-serif;
 	text-align: center;
-	line-height: 50vh;
+	line-height: 100vh;
 	background: teal;
 }
 
@@ -31,20 +31,20 @@
 	background: steelblue;
 }
 
-
-
-/*.fsCslide:nth-child(1){
-	background: darksalmon;
+#fscIndex {
+	height: 2vw;
+	position: fixed;
+	top: 85vh;
+	left: 0;
 }
-.fsCslide:nth-child(2){
-	background: lightgreen;
+.fscCommon {
+	border-radius: 50%;
+	display: inline-block;
+	opacity: 0.55;
 }
-.fsCslide:nth-child(3){
-	background: steelblue;
+.fscDark{
+	background: #aaa;
 }
-.fsCslide:nth-child(4){
-	background: teal;
+.fscLight {
+	background: white;
 }
-.fsCslide:nth-child(5){
-	background: crimson;
-}*/
