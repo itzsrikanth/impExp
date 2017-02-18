@@ -1,40 +1,157 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Welcome | impExp</title>
+	<title>fsC</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<script type="text/javascript" src="libs/jquery-2.2.4.js"></script>
 	<link rel="stylesheet" type="text/css" href="libs/bootstrap-3.3.6-dist/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/welcome.css">
-
-	<script type="text/javascript" src="libs/jquery-3.0.0.js"></script>
+	<link rel="stylesheet" type="text/css" href="libs/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
 	<script type="text/javascript" src="libs/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
-
 </head>
 <body>
-	<div id="bg" class="container-fluid fullscreen">
-		<div id="dimmer" class="container-fluid fullscreen">
-			<div class="row">
-				<div class="col-lg-4 col-md-3 col-sm-2"></div>
-				<div id="slogan" class="col-lg-4 col-md-6 col-sm-8 col-xs-12">
-					<p>It's not about  <strong>IDEAs..!!!</strong></p>		
-					<p>It's their course to Action from thoughts.</p>	
-				</div>
-			</div>
-			<div class="row"></div>		
-		</div>
+<div class="cover">
+	<div class="fsCcontainer">
+		<div class="fsCslide a"></div>
+		<div class="fsCslide b"></div>
+		<div class="fsCslide c"></div>
+		<div class="fsCslide d"></div>
+		<div class="fsCslide e"></div>
 	</div>
+</div>
+
+<div id="user-screen-size">
+	<div class="visible-lg-inline"></div>
+	<div class="visible-md-inline"></div>
+	<div class="visible-sm-inline"></div>
+	<div class="visible-xs-inline"></div>
+</div>
+<div class="dimmer"></div>
+<div id="fscIndex"></div>
+
+<!-- ------------  page specific content  ------------ -->
+<div class="fixer">
+<div id="slogan" class="container-fluid">
+		<p>It's not about  <strong>IDEAs..!!!</strong></p>		
+		<p>It's their course to Action from thoughts.</p>
+</div>
+<div class="container-fluid" id="cage"></div>
+</div>
+<script type="text/javascript">
+
+	function getBootstrapScreenSize(){
+		var fscC = $('.fscCommon');
+		if ( $('.visible-lg-inline').is(':visible') ) {
+			fscC.width(15).height(15);
+			return 1;
+		}
+		else if ( $('.visible-md-inline').is(':visible') ) {
+			fscC.width(15).height(15);
+			return 2;
+		}
+		else if ( $('.visible-sm-inline').is(':visible') ){ 
+			fscC.width(15).height(15);
+			return 3;
+		}
+		else {
+			fscC.width(10).height(10);
+			return 4;
+		}
+	}
 
 
+	var doc = $(document),
+		w = $('.cover').width(),
+		first = $('.fsCslide:first-child').clone(),
+		last = $('.fsCslide:last-child').clone();
 
+	first.appendTo($('.fsCcontainer'));
+	last.prependTo($('.fsCcontainer'));
 
+	var count = $('.fsCslide').length;
+	$('.fsCcontainer').width(w*count);
 
+	//initializing div by adding 'active' class
+	var light = Math.ceil((count-2)/2);
+	$('.fsCslide:eq(' + light + ')').addClass('fsCactive');
 
+	$('.cover').scrollLeft($('.fsCactive').position().left);
+	for(var i=0;i<(count-2);i++){
+		$('<div></div>').addClass('fscDark fscCommon').appendTo('#fscIndex');
+	}
+	$('.fscDark:eq('+(light-1)+')').removeClass('fscDark').addClass('fscLight');
 
-<!-- 	<div id="slogan">
-		
-	</div>
-	<div id="clickButton" class="WelcomeButton">
-		   <div></div>
-	</div>
-	<div id="buttonBg" class="WelcomeButton"></div>  -->
+	getBootstrapScreenSize();
+	$('div', '#fscIndex').css('margin', '0 10px');
+	$('#fscIndex').css('left', (doc.width()-$('#fscIndex').width())/2+'px');
+
+// --------------------------------------------------------
+	function goRight(){
+		$('.fsCactive').removeClass('fsCactive').next().addClass('fsCactive');
+		$('.fscLight').removeClass('fscLight').addClass('fscDark').next().addClass('fscLight').removeClass('fscDark');
+		$('.cover').animate({ scrollLeft: $('.cover').scrollLeft() + Math.abs($('.fsCactive').position().left)},
+		{	duration: 500,
+			ease: 'easeOutBounce',
+			complete: function(){
+				if( $('.fsCactive').next().length === 0 ){
+					$('.cover').scrollLeft( w );
+					$('.fsCactive').removeClass('fsCactive');
+					$('.fsCslide:eq(1)').addClass('fsCactive');
+					//changing index for continuous loop
+					$('.fscLight').removeClass('fscLight').addClass('fscDark');
+					$('.fscCommon:first-child').removeClass('fscDark').addClass('fscLight');
+				}
+			}
+		});
+	}
+
+	function goLeft(){
+		$('.fsCactive').removeClass('fsCactive').prev().addClass('fsCactive');
+		$('.fscLight').removeClass('fscLight').addClass('fscDark').prev().addClass('fscLight').removeClass('fscDark');
+		$('.cover').animate({ scrollLeft: $('.cover').scrollLeft() - Math.abs($('.fsCactive').position().left)},
+		{	duration: 500,
+			ease: 'easeOutBounce',
+			complete: function(){
+				if( $('.fsCactive').prev().length === 0 ){
+					$('.cover').scrollLeft( w * ( count-2 ) );
+					$('.fsCactive').removeClass('fsCactive');
+					$('.fsCslide:eq(-2)').addClass('fsCactive');
+					//changing index for continuous loop
+					$('.fscLight').removeClass('fscLight').addClass('fscDark');
+					$('.fscCommon:last-child').removeClass('fscDark').addClass('fscLight');
+				}
+			}
+		});
+	}
+
+	var automate = setInterval(goRight, 5000);
+
+	//handing key press
+	doc.keydown(function(e){
+		switch (e.keyCode){
+			case 39:
+				clearInterval(automate);
+				goRight();					
+				automate = setInterval(goRight, 5000);
+				break;
+			case 37: 
+				clearInterval(automate);
+				goLeft();
+				automate = setInterval(goRight, 5000);
+				break;					
+		}
+
+	});
+
+	//handling screen resize
+	$(window).resize(function(){
+		clearInterval(automate);
+		$('.cover').scrollLeft( $('.cover').scrollLeft() + $('.fsCactive').position().left);
+		$('#fscIndex').css('left', (doc.width()-$('#fscIndex').width())/2+'px');
+		w = $('.cover').width();
+		getBootstrapScreenSize();
+		automate = setInterval(goRight, 5000);
+	});
+
+</script>
 </body>
 </html>
